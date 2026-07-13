@@ -363,11 +363,40 @@
     cursor: pointer !important;
   }
 
+  /* ---- Mobile sticky action bar (hidden on desktop) ---- */
+  #paint-pals-estimate-form .pp-sticky-bar { display: none !important; }
+  #paint-pals-estimate-form .pp-sticky-btn {
+    flex: 1 1 50% !important;
+    height: 58px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+  }
+  #paint-pals-estimate-form .pp-sticky-quote { background: #000 !important; }
+  #paint-pals-estimate-form .pp-sticky-call { background: #2F7740 !important; }
+
   /* Bulletproof [hidden] — must stay LAST so it wins over display rules above */
   #paint-pals-estimate-form [hidden] { display: none !important; }
 
   /* ---- Mobile ---- */
   @media (max-width: 900px) {
+    /* Keep page content clear of the fixed sticky bar */
+    body { padding-bottom: 58px !important; }
+    #paint-pals-estimate-form .pp-sticky-bar {
+      display: flex !important;
+      position: fixed !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      z-index: 99999 !important;
+      box-shadow: 0 -4px 14px rgba(0,0,0,.18) !important;
+    }
     #paint-pals-estimate-form { padding: 44px 0 !important; }
     #paint-pals-estimate-form .pp-hero { flex-direction: column !important; gap: 34px !important; }
     #paint-pals-estimate-form .pp-hero-left { text-align: center !important; }
@@ -400,7 +429,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.8 1.6 7z"/></svg>
             <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.8 1.6 7z"/></svg>
           </span>
-          <span class="pp-reviews-text">4.9 | 329 Google Reviews</span>
+          <span class="pp-reviews-text"><span id="ppRating">4.9</span> | <span id="ppReviewCount">329</span> Google Reviews</span>
         </div>
 
         <ul class="pp-features">
@@ -526,6 +555,12 @@
 
     </div>
   </div>
+
+  <!-- Mobile-only sticky action bar -->
+  <div class="pp-sticky-bar">
+    <button type="button" class="pp-sticky-btn pp-sticky-quote" id="ppStickyQuote">Get Quote</button>
+    <a href="tel:9706708887" class="pp-sticky-btn pp-sticky-call">Call Now</a>
+  </div>
 </div>
 
 <script>
@@ -534,6 +569,17 @@
 
   var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/nPPG7BKPRH9771vRMDZ6/webhook-trigger/4f0e66e5-d9c8-44e7-8f9d-260f224c8848';
   var TABOOLA_EVENT_ID = 1717712;
+
+  /* ---- Google reviews badge auto-update (optional) ----
+     Fill in both values to keep the rating/review count current.
+     1. GOOGLE_PLACE_ID: find it at https://developers.google.com/maps/documentation/places/web-service/place-id
+     2. GOOGLE_PLACES_API_KEY: create in Google Cloud Console with ONLY the
+        "Places API (New)" enabled, and restrict it to your website's domain
+        (Application restrictions -> Websites) so it can't be abused.
+     Leave blank and the badge keeps the numbers written in the HTML. */
+  var GOOGLE_PLACE_ID = '';
+  var GOOGLE_PLACES_API_KEY = '';
+  var REVIEWS_CACHE_HOURS = 24;
 
   /* ---- Service area (ZIP -> City) ---- */
   var SERVICE_AREA = {
@@ -627,6 +673,38 @@
     var firstInput = $(id).querySelector('input');
     if (firstInput) firstInput.focus({ preventScroll: true });
     root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---- Live Google rating / review count (cached in localStorage) ---- */
+  function applyReviewBadge(rating, count) {
+    if (rating) $('ppRating').textContent = Number(rating).toFixed(1);
+    if (count) $('ppReviewCount').textContent = String(count);
+  }
+  function refreshReviewBadge() {
+    if (!GOOGLE_PLACE_ID || !GOOGLE_PLACES_API_KEY) return;
+
+    var CACHE_KEY = 'ppGoogleReviews';
+    try {
+      var cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && (Date.now() - cached.t) < REVIEWS_CACHE_HOURS * 3600000) {
+        applyReviewBadge(cached.rating, cached.count);
+        return;
+      }
+    } catch (e) {}
+
+    fetch('https://places.googleapis.com/v1/places/' + encodeURIComponent(GOOGLE_PLACE_ID) +
+          '?fields=rating,userRatingCount&key=' + encodeURIComponent(GOOGLE_PLACES_API_KEY))
+      .then(function (resp) { return resp.ok ? resp.json() : null; })
+      .then(function (data) {
+        if (!data || !data.rating) return;
+        applyReviewBadge(data.rating, data.userRatingCount);
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            t: Date.now(), rating: data.rating, count: data.userRatingCount
+          }));
+        } catch (e) {}
+      })
+      .catch(function () { /* keep the hardcoded numbers */ });
   }
 
   /* Taboola conversion — safe if _tfa isn't loaded */
@@ -805,6 +883,15 @@
       e.preventDefault();
       location.reload();
     });
+
+    /* Sticky bar: scroll to the form and focus the active step's input */
+    $('ppStickyQuote').addEventListener('click', function () {
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var activeInput = root.querySelector('.pp-step:not([hidden]) input');
+      if (activeInput) activeInput.focus({ preventScroll: true });
+    });
+
+    refreshReviewBadge();
   }
 
   if (document.readyState === 'loading') {
