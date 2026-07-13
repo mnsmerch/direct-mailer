@@ -1,0 +1,816 @@
+<!-- ============================================================
+     Paint Pals — Direct Mailer Estimate Form (WordPress embed)
+     Paste this entire block into a Custom HTML block / section.
+     Styled to match quote.thepaintpals.com landers.
+     ============================================================ -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+
+  /* ---- Scoped reset (keeps WP themes/builders from leaking styles in) ---- */
+  #paint-pals-estimate-form,
+  #paint-pals-estimate-form * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    line-height: 1.4 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  }
+  /* ---- Full-bleed section ---- */
+  #paint-pals-estimate-form {
+    position: relative !important;
+    width: 100vw !important;
+    left: 50% !important;
+    margin-left: -50vw !important;
+    overflow-x: hidden !important;
+    background:
+      linear-gradient(rgba(255,255,255,.78), rgba(255,255,255,.78)),
+      url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/nPPG7BKPRH9771vRMDZ6/media/69caf15c50b94917ec06b652.jpg') center / cover no-repeat !important;
+    padding: 72px 0 !important;
+  }
+
+  #paint-pals-estimate-form .pp-container {
+    max-width: 1160px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+  }
+
+  /* ---- Hero layout: headline left, form card right ---- */
+  #paint-pals-estimate-form .pp-hero {
+    display: flex !important;
+    align-items: center !important;
+    gap: 56px !important;
+  }
+  #paint-pals-estimate-form .pp-hero-left { flex: 1 1 0 !important; min-width: 0 !important; }
+  #paint-pals-estimate-form .pp-card-col { flex: 0 0 460px !important; max-width: 460px !important; width: 100% !important; }
+
+  #paint-pals-estimate-form .pp-top-line {
+    color: #2F7740 !important;
+    font-size: 17px !important;
+    font-style: italic !important;
+    font-weight: 500 !important;
+    margin: 0 0 14px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-main-heading {
+    color: #1f2937 !important;
+    font-size: 46px !important;
+    font-weight: 400 !important;
+    line-height: 1.15 !important;
+    margin: 0 0 28px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-main-heading strong {
+    color: #2F7740 !important;
+    font-weight: 700 !important;
+  }
+
+  /* Google reviews badge */
+  #paint-pals-estimate-form .pp-reviews {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 34px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-reviews svg { display: block !important; }
+  #paint-pals-estimate-form .pp-stars { display: flex !important; gap: 2px !important; }
+  #paint-pals-estimate-form .pp-reviews-text {
+    color: #1f2937 !important;
+    font-size: 19px !important;
+    font-weight: 500 !important;
+  }
+
+  /* Feature checkmarks */
+  #paint-pals-estimate-form .pp-features {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    list-style: none !important;
+  }
+  #paint-pals-estimate-form .pp-feature-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  #paint-pals-estimate-form .pp-check-circle {
+    width: 30px !important; height: 30px !important;
+    flex: 0 0 30px !important;
+    border-radius: 50% !important;
+    background: #2F7740 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+  }
+  #paint-pals-estimate-form .pp-feature-title {
+    color: #1f2937 !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+  }
+  #paint-pals-estimate-form .pp-feature-subtitle {
+    color: #4b5563 !important;
+    font-size: 14px !important;
+  }
+
+  /* ---- Form card ---- */
+  #paint-pals-estimate-form .pp-card {
+    background: #fff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 12px 34px rgba(14,24,44,.16) !important;
+    padding: 34px 30px !important;
+  }
+  #paint-pals-estimate-form .pp-card-title {
+    text-align: center !important;
+    color: #1f2937 !important;
+    font-size: 27px !important;
+    font-weight: 500 !important;
+    margin: 0 0 22px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-card-title strong {
+    color: #2F7740 !important;
+    font-weight: 700 !important;
+  }
+  #paint-pals-estimate-form .pp-card-sub {
+    text-align: center !important;
+    color: #4b5563 !important;
+    font-size: 15px !important;
+    margin: -12px 0 22px 0 !important;
+  }
+
+  /* Inputs */
+  #paint-pals-estimate-form .pp-field { margin: 0 0 14px 0 !important; }
+  #paint-pals-estimate-form .pp-input-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    background: #fff !important;
+    border: 1px solid #d0d5dd !important;
+    border-radius: 8px !important;
+    height: 52px !important;
+    padding: 0 14px !important;
+    transition: border-color .2s ease, box-shadow .2s ease !important;
+  }
+  #paint-pals-estimate-form .pp-input-wrapper:focus-within {
+    border-color: #2F7740 !important;
+    box-shadow: 0 0 0 3px rgba(47,119,64,.12) !important;
+  }
+  #paint-pals-estimate-form .pp-input-icon {
+    width: 20px !important; height: 20px !important;
+    flex: 0 0 20px !important;
+    margin-right: 10px !important;
+    fill: #9ca3af !important;
+  }
+  #paint-pals-estimate-form .pp-text-input {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    color: #1f2937 !important;
+    font-size: 16px !important;
+    height: 100% !important;
+  }
+  #paint-pals-estimate-form .pp-text-input::placeholder { color: #9ca3af !important; }
+
+  #paint-pals-estimate-form .pp-visually-hidden {
+    position: absolute !important; width: 1px !important; height: 1px !important;
+    margin: -1px !important; overflow: hidden !important;
+    clip: rect(0 0 0 0) !important; border: 0 !important;
+  }
+
+  /* Buttons */
+  #paint-pals-estimate-form .pp-primary-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    height: 52px !important;
+    background: #2F7740 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: background .2s ease, transform .15s ease, box-shadow .2s ease !important;
+  }
+  #paint-pals-estimate-form .pp-primary-btn:hover {
+    background: #266d4d !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(47,119,64,.28) !important;
+  }
+  #paint-pals-estimate-form .pp-primary-btn:disabled {
+    background: #cacaca !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  #paint-pals-estimate-form .pp-back-link {
+    display: block !important;
+    margin: 14px auto 0 auto !important;
+    background: transparent !important;
+    border: none !important;
+    color: #607179 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+  }
+  #paint-pals-estimate-form .pp-back-link:hover { color: #35495e !important; text-decoration: underline !important; }
+
+  /* Service selection */
+  #paint-pals-estimate-form .pp-service-options {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+  #paint-pals-estimate-form .pp-service-btn {
+    background: #fff !important;
+    border: 1px solid #d0d5dd !important;
+    border-radius: 10px !important;
+    padding: 18px 10px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    transition: border-color .2s ease, background .2s ease, transform .15s ease !important;
+  }
+  #paint-pals-estimate-form .pp-service-btn:hover {
+    border-color: #2F7740 !important;
+    background: #f2f7f3 !important;
+    transform: translateY(-2px) !important;
+  }
+  #paint-pals-estimate-form .pp-emoji { display: block !important; font-size: 36px !important; line-height: 1 !important; margin: 0 0 8px 0 !important; }
+  #paint-pals-estimate-form .pp-service-btn span {
+    display: block !important;
+    color: #1f2937 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .5px !important;
+  }
+
+  /* Step copy */
+  #paint-pals-estimate-form .pp-greeting {
+    text-align: center !important;
+    color: #2F7740 !important;
+    font-size: 16px !important;
+    font-style: italic !important;
+    font-weight: 500 !important;
+    margin: 0 0 8px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-question {
+    text-align: center !important;
+    color: #1f2937 !important;
+    font-size: 21px !important;
+    font-weight: 600 !important;
+    margin: 0 0 20px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-question small {
+    display: block !important;
+    color: #4b5563 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    margin-top: 6px !important;
+  }
+  #paint-pals-estimate-form .pp-final-flag {
+    display: block !important;
+    color: #2F7740 !important;
+    font-style: italic !important;
+    font-weight: 700 !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Messages */
+  #paint-pals-estimate-form .pp-loading-message {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    color: #35495e !important;
+    font-size: 14px !important;
+    margin: 12px 0 0 0 !important;
+  }
+  #paint-pals-estimate-form .pp-spinner {
+    width: 15px !important; height: 15px !important;
+    flex: 0 0 15px !important;
+    border: 2px solid #2F7740 !important;
+    border-top-color: transparent !important;
+    border-radius: 50% !important;
+    animation: ppSpin .8s linear infinite !important;
+  }
+  @keyframes ppSpin { to { transform: rotate(360deg); } }
+  #paint-pals-estimate-form .pp-error-message {
+    color: #b00020 !important;
+    background: #fdecec !important;
+    border: 1px solid #f5b5b5 !important;
+    border-radius: 8px !important;
+    padding: 11px 14px !important;
+    font-size: 14px !important;
+    text-align: center !important;
+    margin: 12px 0 0 0 !important;
+  }
+
+  /* Thank-you */
+  #paint-pals-estimate-form .pp-thank-check {
+    width: 58px !important; height: 58px !important;
+    margin: 2px auto 14px auto !important;
+    border-radius: 50% !important;
+    background: #2F7740 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+    font-size: 30px !important;
+    font-weight: 700 !important;
+  }
+  #paint-pals-estimate-form .pp-thank-title {
+    text-align: center !important;
+    color: #1f2937 !important;
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    margin: 0 0 8px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-thank-subtitle {
+    text-align: center !important;
+    color: #4b5563 !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 20px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-cta-heading {
+    text-align: center !important;
+    color: #1f2937 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    margin: 0 0 6px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-cta-copy {
+    text-align: center !important;
+    color: #4b5563 !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 16px 0 !important;
+  }
+  #paint-pals-estimate-form .pp-cta-copy strong { color: #2F7740 !important; font-weight: 700 !important; }
+  #paint-pals-estimate-form .pp-start-over {
+    display: block !important;
+    text-align: center !important;
+    margin: 14px 0 0 0 !important;
+    color: #607179 !important;
+    font-size: 13px !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+  }
+
+  /* Bulletproof [hidden] — must stay LAST so it wins over display rules above */
+  #paint-pals-estimate-form [hidden] { display: none !important; }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 900px) {
+    #paint-pals-estimate-form { padding: 44px 0 !important; }
+    #paint-pals-estimate-form .pp-hero { flex-direction: column !important; gap: 34px !important; }
+    #paint-pals-estimate-form .pp-hero-left { text-align: center !important; }
+    #paint-pals-estimate-form .pp-top-line { font-size: 15px !important; }
+    #paint-pals-estimate-form .pp-main-heading { font-size: 31px !important; margin-bottom: 20px !important; }
+    #paint-pals-estimate-form .pp-reviews { justify-content: center !important; flex-wrap: wrap !important; margin-bottom: 24px !important; }
+    #paint-pals-estimate-form .pp-reviews-text { font-size: 16px !important; width: 100% !important; text-align: center !important; }
+    #paint-pals-estimate-form .pp-features { display: none !important; }
+    #paint-pals-estimate-form .pp-card-col { flex: 1 1 auto !important; max-width: 520px !important; margin: 0 auto !important; }
+    #paint-pals-estimate-form .pp-card { padding: 26px 20px !important; }
+    #paint-pals-estimate-form .pp-card-title { font-size: 23px !important; }
+  }
+</style>
+
+<div id="paint-pals-estimate-form">
+  <div class="pp-container">
+    <div class="pp-hero">
+
+      <!-- Left: headline + trust -->
+      <div class="pp-hero-left">
+        <p class="pp-top-line">Homeowners who choose Paint Pals love our 5-Star service!</p>
+        <h1 class="pp-main-heading">Colorado&rsquo;s Leading Experts in <strong>Interior &amp; Exterior</strong> Painting</h1>
+
+        <div class="pp-reviews" aria-label="4.9 stars, 329 Google Reviews">
+          <svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+          <span class="pp-stars" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.8 1.6 7z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.8 1.6 7z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.8 1.6 7z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.8 1.6 7z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.2-.6L12 2l2.8 6.6 7.2.6-5.4 4.8 1.6 7z"/></svg>
+          </span>
+          <span class="pp-reviews-text">4.9 | 329 Google Reviews</span>
+        </div>
+
+        <ul class="pp-features">
+          <li class="pp-feature-item">
+            <span class="pp-check-circle">&#10003;</span>
+            <span><span class="pp-feature-title">Fast, Detailed &amp; Honest Quote</span> <span class="pp-feature-subtitle">&mdash; professional estimates</span></span>
+          </li>
+          <li class="pp-feature-item">
+            <span class="pp-check-circle">&#10003;</span>
+            <span><span class="pp-feature-title">No Hidden Fees. No Surprises.</span> <span class="pp-feature-subtitle">&mdash; transparent pricing</span></span>
+          </li>
+          <li class="pp-feature-item">
+            <span class="pp-check-circle">&#10003;</span>
+            <span><span class="pp-feature-title">0% Financing Available</span> <span class="pp-feature-subtitle">&mdash; flexible payment options</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: form card -->
+      <div class="pp-card-col">
+        <div class="pp-card">
+
+          <!-- STEP 1: ZIP -->
+          <div id="ppStep1" class="pp-step">
+            <h2 class="pp-card-title"><strong>FREE</strong> Painting Estimate</h2>
+            <p class="pp-card-sub">Enter your ZIP code to see if we service your area.</p>
+            <div class="pp-field">
+              <label for="ppZipCode" class="pp-visually-hidden">ZIP code</label>
+              <div class="pp-input-wrapper">
+                <svg class="pp-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+                <input type="text" class="pp-text-input" id="ppZipCode" placeholder="ZIP code*" maxlength="5" inputmode="numeric" pattern="[0-9]*" autocomplete="postal-code">
+              </div>
+            </div>
+            <button type="button" class="pp-primary-btn" id="ppZipBtn">Get A Free Quote</button>
+            <div class="pp-loading-message" id="ppLoadingMessage" hidden>
+              Checking if we service your area <span class="pp-spinner" aria-hidden="true"></span>
+            </div>
+            <div class="pp-error-message" id="ppErrorMessage" role="alert" hidden>
+              Sorry, we are not currently servicing your area. Please check back soon as we're expanding!
+            </div>
+          </div>
+
+          <!-- STEP 2: SERVICE -->
+          <div id="ppStep2" class="pp-step" hidden>
+            <p id="ppGreeting" class="pp-greeting">Hello, neighbor!</p>
+            <h2 class="pp-question">What type of painting do you need?</h2>
+            <div class="pp-service-options">
+              <button type="button" class="pp-service-btn" data-service="exterior"><span class="pp-emoji">&#127968;</span><span>Exterior</span></button>
+              <button type="button" class="pp-service-btn" data-service="interior"><span class="pp-emoji">&#128715;&#65039;</span><span>Interior</span></button>
+              <button type="button" class="pp-service-btn" data-service="cabinets"><span class="pp-emoji">&#128682;</span><span>Cabinet</span></button>
+              <button type="button" class="pp-service-btn" data-service="other"><span class="pp-emoji">&#10024;</span><span>Other</span></button>
+            </div>
+          </div>
+
+          <!-- STEP 3: NAME -->
+          <div id="ppStep3" class="pp-step" hidden>
+            <h2 class="pp-question">Who should we prepare this <strong style="color:#2F7740 !important;">FREE</strong> quote for?</h2>
+            <div class="pp-field">
+              <label for="ppFullName" class="pp-visually-hidden">Full name</label>
+              <div class="pp-input-wrapper">
+                <svg class="pp-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <input id="ppFullName" class="pp-text-input" type="text" placeholder="Full Name*" autocomplete="name">
+              </div>
+            </div>
+            <button type="button" class="pp-primary-btn" id="ppNameNextBtn" disabled>Next</button>
+            <button type="button" class="pp-back-link" data-back="ppStep2">&lt; Back</button>
+          </div>
+
+          <!-- STEP 4: EMAIL -->
+          <div id="ppStep4" class="pp-step" hidden>
+            <h2 class="pp-question">Where should we send your quote?</h2>
+            <div class="pp-field">
+              <label for="ppEmail" class="pp-visually-hidden">Email</label>
+              <div class="pp-input-wrapper">
+                <svg class="pp-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <input id="ppEmail" class="pp-text-input" type="email" placeholder="Email*" autocomplete="email" inputmode="email">
+              </div>
+            </div>
+            <button type="button" class="pp-primary-btn" id="ppEmailNextBtn" disabled>Next</button>
+            <button type="button" class="pp-back-link" data-back="ppStep3">&lt; Back</button>
+          </div>
+
+          <!-- STEP 5: PHONE + SUBMIT -->
+          <div id="ppStep5" class="pp-step" hidden>
+            <h2 class="pp-question">
+              <span class="pp-final-flag">Final step!</span>
+              What is your phone number?
+              <small>(We need to make sure that you're a real person!)</small>
+            </h2>
+            <div class="pp-field">
+              <label for="ppPhone" class="pp-visually-hidden">Phone</label>
+              <div class="pp-input-wrapper">
+                <svg class="pp-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <input id="ppPhone" class="pp-text-input" type="tel" placeholder="Phone*" inputmode="tel" autocomplete="tel">
+              </div>
+            </div>
+            <button type="button" class="pp-primary-btn" id="ppSubmitBtnFinal" disabled>Get My Free Quote</button>
+            <button type="button" class="pp-back-link" data-back="ppStep4">&lt; Back</button>
+            <div class="pp-loading-message" id="ppSubmitLoadingMessage" hidden>
+              Submitting your information <span class="pp-spinner" aria-hidden="true"></span>
+            </div>
+            <div class="pp-error-message" id="ppSubmitErrorMessage" role="alert" hidden>
+              Sorry, there was an error submitting your information. Please try again.
+            </div>
+          </div>
+
+          <!-- THANK YOU -->
+          <div id="ppStepThankYou" class="pp-step" hidden>
+            <div class="pp-thank-check" aria-hidden="true">&#10003;</div>
+            <h2 class="pp-thank-title">Thank You!</h2>
+            <p class="pp-thank-subtitle">One of our amazing team members will be in touch with you shortly.</p>
+            <p class="pp-cta-heading">Want to skip the wait?</p>
+            <p class="pp-cta-copy">Click below to <strong>CALL NOW</strong> and get the conversation started! Otherwise, someone from our team will be reaching out very soon, so keep your phone handy!</p>
+            <a href="tel:9705999614" class="pp-primary-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              CALL NOW
+            </a>
+            <a href="#" class="pp-start-over" id="ppStartOver">Start over</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/nPPG7BKPRH9771vRMDZ6/webhook-trigger/37aa1ef8-0cf9-48a9-8a70-c355745ef0cc';
+  var TABOOLA_EVENT_ID = 1717712;
+
+  /* ---- Service area (ZIP -> City) ---- */
+  var SERVICE_AREA = {
+    '80501': 'Longmont', '80502': 'Longmont', '80503': 'Longmont', '80504': 'Longmont',
+    '80513': 'Berthoud', '80520': 'Dacono',
+    '80521': 'Fort Collins', '80522': 'Fort Collins', '80523': 'Fort Collins', '80524': 'Fort Collins',
+    '80525': 'Fort Collins', '80526': 'Fort Collins', '80527': 'Fort Collins', '80528': 'Fort Collins',
+    '80530': 'Frederick', '80533': 'Hygiene', '80534': 'Johnstown',
+    '80537': 'Loveland', '80538': 'Loveland', '80539': 'Loveland',
+    '80541': 'Masonville', '80542': 'Mead', '80543': 'Milliken', '80544': 'Niwot',
+    '80546': 'Severance', '80547': 'Timnath', '80549': 'Wellington',
+    '80550': 'Windsor', '80551': 'Windsor', '80553': 'Fort Collins',
+    '80615': 'Ault', '80620': 'Evans', '80621': 'Fort Lupton', '80623': 'Gilcrest',
+    '80631': 'Greeley', '80632': 'Greeley', '80633': 'Greeley', '80634': 'Greeley',
+    '80638': 'Greeley', '80639': 'Greeley',
+    '80642': 'Hudson', '80645': 'Kersey', '80646': 'Lucerne', '80651': 'Platteville',
+    '80001': 'Arvada', '80002': 'Arvada', '80003': 'Arvada', '80004': 'Arvada',
+    '80005': 'Arvada', '80006': 'Arvada', '80007': 'Arvada',
+    '80010': 'Aurora', '80011': 'Aurora', '80012': 'Aurora', '80013': 'Aurora',
+    '80014': 'Aurora', '80015': 'Aurora', '80016': 'Aurora', '80017': 'Aurora',
+    '80018': 'Aurora', '80019': 'Aurora',
+    '80020': 'Broomfield', '80021': 'Westminster', '80022': 'Commerce City', '80023': 'Broomfield',
+    '80024': 'Dupont', '80025': 'Eldorado Springs', '80026': 'Lafayette', '80027': 'Louisville',
+    '80030': 'Westminster', '80031': 'Westminster',
+    '80033': 'Wheat Ridge', '80034': 'Wheat Ridge',
+    '80035': 'Westminster', '80036': 'Westminster', '80037': 'Commerce City', '80038': 'Broomfield',
+    '80040': 'Aurora', '80042': 'Aurora', '80045': 'Aurora',
+    '80110': 'Englewood', '80111': 'Englewood', '80112': 'Englewood', '80113': 'Englewood',
+    '80120': 'Littleton', '80121': 'Littleton', '80122': 'Littleton', '80123': 'Littleton',
+    '80124': 'Lone Tree', '80125': 'Littleton', '80126': 'Littleton', '80127': 'Littleton',
+    '80128': 'Littleton', '80129': 'Littleton', '80130': 'Littleton', '80138': 'Parker',
+    '80150': 'Englewood', '80151': 'Englewood', '80155': 'Englewood',
+    '80160': 'Littleton', '80161': 'Littleton', '80165': 'Littleton', '80166': 'Littleton',
+    '80201': 'Denver', '80202': 'Denver', '80203': 'Denver', '80204': 'Denver',
+    '80205': 'Denver', '80206': 'Denver', '80207': 'Denver', '80208': 'Denver',
+    '80209': 'Denver', '80210': 'Denver', '80211': 'Denver', '80212': 'Denver',
+    '80214': 'Denver', '80215': 'Denver', '80216': 'Denver', '80217': 'Denver',
+    '80218': 'Denver', '80219': 'Denver', '80220': 'Denver', '80221': 'Denver',
+    '80222': 'Denver', '80223': 'Denver', '80224': 'Denver', '80225': 'Denver',
+    '80226': 'Denver', '80227': 'Denver', '80228': 'Denver', '80229': 'Denver',
+    '80230': 'Denver', '80231': 'Denver', '80232': 'Denver', '80233': 'Denver',
+    '80234': 'Denver', '80235': 'Denver', '80236': 'Denver', '80237': 'Denver',
+    '80238': 'Denver', '80239': 'Denver', '80241': 'Thornton', '80243': 'Denver',
+    '80244': 'Denver', '80246': 'Denver', '80247': 'Denver', '80248': 'Denver',
+    '80249': 'Denver', '80250': 'Denver', '80251': 'Denver', '80256': 'Denver',
+    '80257': 'Denver', '80259': 'Denver', '80260': 'Denver', '80261': 'Denver',
+    '80262': 'Denver', '80263': 'Denver', '80264': 'Denver', '80265': 'Denver',
+    '80266': 'Denver', '80271': 'Denver', '80273': 'Denver', '80274': 'Denver',
+    '80281': 'Denver', '80290': 'Denver', '80291': 'Denver', '80293': 'Denver',
+    '80294': 'Denver', '80299': 'Denver',
+    '80301': 'Boulder', '80303': 'Boulder', '80304': 'Boulder', '80305': 'Boulder',
+    '80309': 'Boulder', '80310': 'Boulder',
+    '80401': 'Golden', '80402': 'Golden', '80419': 'Golden',
+    '80514': 'Frederick', '80516': 'Erie',
+    '80601': 'Brighton', '80602': 'Brighton', '80603': 'Brighton'
+  };
+
+  /* ---- UTM / attribution capture (once per page load) ---- */
+  var ATTR_KEYS = [
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_id',
+    'utm_source_platform', 'utm_creative_format', 'utm_marketing_tactic', 'utm_title',
+    'gclid', 'wbraid', 'gbraid', 'fbclid', 'msclkid', 'ttclid', 'li_fat_id', 'taboolaclickid'
+  ];
+  function getAttribution() {
+    var qp = new URLSearchParams(window.location.search);
+    var attrib = {};
+    ATTR_KEYS.forEach(function (key) {
+      var v = qp.get(key) || qp.get(key.toLowerCase());
+      if (v) attrib[key] = String(v).slice(0, 300);
+    });
+    attrib.landing_url = window.location.href.split('#')[0];
+    attrib.landing_path = window.location.pathname + window.location.search;
+    attrib.referrer = document.referrer || '';
+    return attrib;
+  }
+  var attribution = getAttribution();
+
+  /* ---- State ---- */
+  var userData = { zipCode: '', city: '', service: '', name: '', email: '', phone: '' };
+
+  /* ---- Helpers ---- */
+  var root = null;
+  function $(id) { return document.getElementById(id); }
+  function onlyDigits(v) { return (v || '').replace(/[^0-9]/g, ''); }
+  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  function isFullName(v) { return /^\S+\s+\S+/.test((v || '').trim()); }
+
+  function showStep(id) {
+    var steps = root.querySelectorAll('.pp-step');
+    for (var i = 0; i < steps.length; i++) steps[i].hidden = (steps[i].id !== id);
+    var firstInput = $(id).querySelector('input');
+    if (firstInput) firstInput.focus({ preventScroll: true });
+    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* Taboola conversion — safe if _tfa isn't loaded */
+  function fireTaboolaLead() {
+    try { _tfa.push({ notify: 'event', name: 'lead', id: TABOOLA_EVENT_ID }); } catch (e) {}
+  }
+
+  /* Enable/disable a button based on an input's validity; Enter advances */
+  function bindValidatedInput(input, button, isValid, onNext) {
+    function update() { button.disabled = !isValid(input.value); }
+    input.addEventListener('input', update);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !button.disabled) onNext();
+    });
+    button.addEventListener('click', onNext);
+    update();
+  }
+
+  /* ---- Step 1: ZIP check ---- */
+  function checkServiceArea() {
+    var zip = onlyDigits($('ppZipCode').value);
+    var loading = $('ppLoadingMessage');
+    var error = $('ppErrorMessage');
+    var btn = $('ppZipBtn');
+
+    error.hidden = true;
+    if (zip.length !== 5) return;
+
+    loading.hidden = false;
+    btn.disabled = true;
+
+    setTimeout(function () {
+      loading.hidden = true;
+      btn.disabled = false;
+
+      if (Object.prototype.hasOwnProperty.call(SERVICE_AREA, zip)) {
+        userData.zipCode = zip;
+        userData.city = SERVICE_AREA[zip] || '';
+        $('ppGreeting').textContent = userData.city
+          ? 'Hello, ' + userData.city + ' neighbor! Let’s save you time, stress, and money.'
+          : 'Hello! Let’s save you time, stress, and money.';
+        showStep('ppStep2');
+      } else {
+        error.hidden = false;
+      }
+    }, 800);
+  }
+
+  /* ---- Submit: FormData first, then JSON no-cors, then hidden form ---- */
+  function buildPayload() {
+    var payload = {
+      zipCode: userData.zipCode,
+      city: userData.city,
+      serviceType: userData.service,
+      name: userData.name,
+      email: userData.email,
+      phone: userData.phone,
+      timestamp: new Date().toISOString(),
+      source: 'Paint Pals Direct Mailer Form'
+    };
+    Object.keys(attribution).forEach(function (k) { payload[k] = attribution[k]; });
+    return payload;
+  }
+
+  function submitLead() {
+    var btn = $('ppSubmitBtnFinal');
+    var loading = $('ppSubmitLoadingMessage');
+    var error = $('ppSubmitErrorMessage');
+    var phone = ($('ppPhone').value || '').trim();
+    if (onlyDigits(phone).length < 10) return;
+
+    userData.phone = phone;
+    var payload = buildPayload();
+
+    error.hidden = true;
+    loading.hidden = false;
+    btn.disabled = true;
+
+    function succeed() {
+      loading.hidden = true;
+      fireTaboolaLead();
+      showStep('ppStepThankYou');
+    }
+
+    var formData = new FormData();
+    Object.keys(payload).forEach(function (k) { formData.append(k, payload[k] == null ? '' : payload[k]); });
+
+    fetch(WEBHOOK_URL, { method: 'POST', body: formData })
+      .then(function (resp) {
+        if (resp.ok) { succeed(); return null; }
+        throw new Error('HTTP ' + resp.status);
+      })
+      .catch(function () {
+        return fetch(WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(succeed).catch(function () {
+          /* Last resort: plain form post in a hidden iframe-less form */
+          try {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = WEBHOOK_URL;
+            form.target = '_blank';
+            form.style.display = 'none';
+            Object.keys(payload).forEach(function (k) {
+              var input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = k;
+              input.value = payload[k] == null ? '' : payload[k];
+              form.appendChild(input);
+            });
+            document.body.appendChild(form);
+            form.submit();
+            setTimeout(function () { document.body.removeChild(form); }, 1000);
+            succeed();
+          } catch (e) {
+            loading.hidden = true;
+            error.hidden = false;
+            btn.disabled = false;
+          }
+        });
+      });
+  }
+
+  /* ---- Wire everything up ---- */
+  function init() {
+    root = document.getElementById('paint-pals-estimate-form');
+    if (!root) return;
+
+    /* Step 1: ZIP (digits only) */
+    var zipInput = $('ppZipCode');
+    zipInput.addEventListener('input', function () {
+      this.value = onlyDigits(this.value).slice(0, 5);
+    });
+    zipInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') checkServiceArea();
+    });
+    $('ppZipBtn').addEventListener('click', checkServiceArea);
+
+    /* Step 2: service selection */
+    var serviceBtns = root.querySelectorAll('.pp-service-btn');
+    for (var i = 0; i < serviceBtns.length; i++) {
+      serviceBtns[i].addEventListener('click', function () {
+        userData.service = this.getAttribute('data-service');
+        showStep('ppStep3');
+      });
+    }
+
+    /* Steps 3-5: validated inputs */
+    bindValidatedInput($('ppFullName'), $('ppNameNextBtn'), isFullName, function () {
+      userData.name = $('ppFullName').value.trim();
+      showStep('ppStep4');
+    });
+    bindValidatedInput($('ppEmail'), $('ppEmailNextBtn'), function (v) {
+      return isValidEmail((v || '').trim());
+    }, function () {
+      userData.email = $('ppEmail').value.trim();
+      showStep('ppStep5');
+    });
+    bindValidatedInput($('ppPhone'), $('ppSubmitBtnFinal'), function (v) {
+      return onlyDigits(v).length >= 10;
+    }, submitLead);
+
+    /* Back links */
+    var backBtns = root.querySelectorAll('.pp-back-link');
+    for (var j = 0; j < backBtns.length; j++) {
+      backBtns[j].addEventListener('click', function () {
+        showStep(this.getAttribute('data-back'));
+      });
+    }
+
+    /* Start over */
+    $('ppStartOver').addEventListener('click', function (e) {
+      e.preventDefault();
+      location.reload();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
