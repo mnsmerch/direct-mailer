@@ -558,7 +558,7 @@
 
   <!-- Mobile-only sticky action bar -->
   <div class="pp-sticky-bar">
-    <button type="button" class="pp-sticky-btn pp-sticky-quote" id="ppStickyQuote">Get Quote</button>
+    <a href="#paint-pals-estimate-form" class="pp-sticky-btn pp-sticky-quote" id="ppStickyQuote">Get Quote</a>
     <a href="tel:9706708887" class="pp-sticky-btn pp-sticky-call">Call Now</a>
   </div>
 </div>
@@ -667,12 +667,27 @@
   function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
   function isFullName(v) { return /^\S+\s+\S+/.test((v || '').trim()); }
 
+  /* Scroll the window to the form. Uses an absolute window.scrollTo (with a
+     plain fallback) because scrollIntoView can silently no-op inside some
+     WP themes/builders that wrap content in overflow containers. */
+  function scrollToForm() {
+    try {
+      var top = root.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - 12;
+      if (top < 0) top = 0;
+      try {
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      } catch (e) {
+        window.scrollTo(0, top);
+      }
+    } catch (e) {}
+  }
+
   function showStep(id) {
     var steps = root.querySelectorAll('.pp-step');
     for (var i = 0; i < steps.length; i++) steps[i].hidden = (steps[i].id !== id);
     var firstInput = $(id).querySelector('input');
     if (firstInput) firstInput.focus({ preventScroll: true });
-    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToForm();
   }
 
   /* ---- Live Google rating / review count (cached in localStorage) ---- */
@@ -714,6 +729,7 @@
 
   /* Enable/disable a button based on an input's validity; Enter advances */
   function bindValidatedInput(input, button, isValid, onNext) {
+    if (!input || !button) return;
     function update() { button.disabled = !isValid(input.value); }
     input.addEventListener('input', update);
     input.addEventListener('keydown', function (e) {
@@ -831,6 +847,12 @@
       });
   }
 
+  /* Attach a listener only if the element exists, so a single missing or
+     builder-mangled element can't break the rest of the wiring */
+  function on(el, evt, fn) {
+    if (el) el.addEventListener(evt, fn);
+  }
+
   /* ---- Wire everything up ---- */
   function init() {
     root = document.getElementById('paint-pals-estimate-form');
@@ -838,13 +860,13 @@
 
     /* Step 1: ZIP (digits only) */
     var zipInput = $('ppZipCode');
-    zipInput.addEventListener('input', function () {
+    on(zipInput, 'input', function () {
       this.value = onlyDigits(this.value).slice(0, 5);
     });
-    zipInput.addEventListener('keydown', function (e) {
+    on(zipInput, 'keydown', function (e) {
       if (e.key === 'Enter') checkServiceArea();
     });
-    $('ppZipBtn').addEventListener('click', checkServiceArea);
+    on($('ppZipBtn'), 'click', checkServiceArea);
 
     /* Step 2: service selection */
     var serviceBtns = root.querySelectorAll('.pp-service-btn');
@@ -879,14 +901,16 @@
     }
 
     /* Start over */
-    $('ppStartOver').addEventListener('click', function (e) {
+    on($('ppStartOver'), 'click', function (e) {
       e.preventDefault();
       location.reload();
     });
 
-    /* Sticky bar: scroll to the form and focus the active step's input */
-    $('ppStickyQuote').addEventListener('click', function () {
-      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* Sticky bar: scroll to the form and focus the active step's input.
+       The link's #paint-pals-estimate-form href is the no-JS fallback. */
+    on($('ppStickyQuote'), 'click', function (e) {
+      e.preventDefault();
+      scrollToForm();
       var activeInput = root.querySelector('.pp-step:not([hidden]) input');
       if (activeInput) activeInput.focus({ preventScroll: true });
     });
